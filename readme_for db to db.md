@@ -1,154 +1,152 @@
-# 🚀 Pro Data Migration Tool  
-*(PostgreSQL / MSSQL / MySQL)*
+🚀 Pro Data Migration Tool
 
-A **Streamlit-based, GUI-first tool** to connect two databases simultaneously, choose **Source** and **Destination**, visually **map columns**, and migrate data in **chunks** across **PostgreSQL, SQL Server (MSSQL), and MySQL**.
+(PostgreSQL / MSSQL / MySQL)
 
----
+A Streamlit-based, GUI-first tool that lets you connect two databases simultaneously, choose Source and Destination, visually map fields, and safely migrate data in chunks across PostgreSQL, SQL Server (MSSQL), and MySQL.
 
-## ✨ Features
-- 🔗 Connect to **two databases at once** (A & B): PostgreSQL, MSSQL, or MySQL.  
-- 🔄 Choose **Source ↔ Destination** dynamically.  
-- 📋 Browse **schemas → tables → columns**, preview sample rows.  
-- 🎯 **Field mapping UI**:  
-  - Auto-map identically named columns  
-  - Inline editing of mappings  
-  - Constants supported (`NULL`, `'static'`)  
-- ⚡ **Chunked migration** for performance & reliability.  
-- 🔒 Optional **SSL mode** (Postgres), **ODBC Driver settings** (MSSQL).  
+✨ Features
 
----
+🔗 Connect two databases at once (A & B): PostgreSQL, MSSQL, MySQL
 
-## ⚙️ Requirements
+🔄 Dynamic Source ↔ Destination selection
 
-### Runtime
-- **Python 3.9+** (3.10+ recommended)
+📋 Browse schemas → tables → columns with previews
 
-### Python Packages
-```bash
+🎯 Field Mapping UI:
+
+Auto-map columns with identical names
+
+Inline mapping editor with support for constants (NULL, 'static_value')
+
+⚡ Chunked migration for performance & reliability
+
+🔒 Secure connections: SSL for PostgreSQL, ODBC Driver for MSSQL
+
+⚙️ Requirements
+Runtime
+
+Python 3.9+ (3.10+ recommended)
+
+Python Packages
 pip install streamlit SQLAlchemy psycopg2-binary pyodbc PyMySQL
 
+Database Client / Driver Setup
 
-## Database Client / Driver Prerequisites
-- PostgreSQL: psycopg2-binary only.
+PostgreSQL → psycopg2-binary only
 
-- MSSQL: requires ODBC Driver 18 for SQL Server
-<pre> ```bash sudo apt-get install msodbcsql18 ``` </pre>
+MSSQL → requires ODBC Driver 18
 
-- MySQL: PyMySQL only.
+sudo apt-get install msodbcsql18
 
-- ✅ Ensure your DB servers accept connections and your user has the required privileges.
 
-# 🚀 Getting Started
-## 1. Setup Project
-<pre> ``` git clone <your-repo-url>
-cd <your-repo-folder> ``` </pre>
-## 2. Create Virtual Environment (Recommended)
+MySQL → PyMySQL only
 
-<pre> ``` python -m venv .venv
+✅ Ensure DB servers allow connections and the user has privileges
+
+🚀 Getting Started
+1. Clone Project
+git clone https://github.com/<your-username>/data-migration-tool.git
+cd data-migration-tool
+
+2. Create Virtual Environment (Recommended)
+python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
- ``` </pre>
 
-## 3. Install Dependencies
-<pre> ``` pip install streamlit SQLAlchemy psycopg2-binary pyodbc PyMySQL  ``` </pre>
+3. Install Dependencies
+pip install -r requirements.txt
 
-## 4. Run the App
-<pre> ``` streamlit run streamlit_app.py  ``` </pre>
+4. Run the App
+streamlit run streamlit_app.py
 
+🖥️ Using the App
+1️⃣ Connect to Databases
 
-# 🖥️ Using the App
-1## ️⃣ Connect to Two Databases
+Select DB type (Postgres / MSSQL / MySQL)
 
-- Select DB type (PostgreSQL / MSSQL / MySQL)
+Enter host, port, database, username, password
 
-- Enter Host, Port, Database, User, Password
+(Postgres only) choose SSL mode
 
-- For Postgres: set SSL mode (disable for localhost)
+Click Connect A, Connect B, or 🔗 Connect Both
 
-- Click Connect A, Connect B, or 🔗 Connect Both
+2️⃣ Choose Source & Destination
 
-2## ️⃣ Choose Source & Destination
+Pick one as Source, the other as Destination
 
-- Pick Source Connection (A or B)
+3️⃣ Pick Tables
 
-- Pick Destination Connection (must be the other one)
+Source: choose Schema + Table → view columns
 
-## 3 ️⃣ Pick Tables
+Destination: choose Schema + Table → view columns
 
-- Source: choose Schema + Table, view columns
+4️⃣ Map Fields
 
-- Destination: choose Schema + Table, view columns
+Auto-map same-name columns
 
-## 4️⃣ Map Fields
+Inline edit destination → source/constant
 
-- Use ↔ Auto-map to auto-fill identical names
+Supports constants: NULL, 'static_value'
 
-- Adjust mappings inline (dest → source/constant)
+5️⃣ Set Chunk Size
 
-- Supports constants: NULL or 'static_value'
+Default: 5000 rows per batch
 
-##5️⃣ Set Chunk Size
+🔹 Larger = faster, heavier load
 
-- Default: 5000 rows per batch
+🔹 Smaller = safer, slower
 
-- 🔹 Larger = fewer trips but heavier load
+6️⃣ Run Migration
 
-- 🔹 Smaller = safer but slower
+Click 🚀 Migrate Data
 
-## 6#️⃣ Run Migration
+Progress updates with row counts
 
-- Click 🚀 Migrate Data
+Preview panels for both source & destination
 
-- Progress shown as rows copied
+📝 Notes & Best Practices
 
-- Preview panels available for both source & destination
+Chunked transfers improve safety & performance
 
-## 📝 Notes & Best Practices
+Transactions ensure safe batch inserts
 
-- Chunked transfer: safer & faster for large tables.
+Quoting rules auto-applied ("col" Postgres, [col] MSSQL, `col` MySQL)
 
-- Transactions: Inserts run in transactional batches.
+Postgres SSL →
 
-- Constants: Map destination columns to NULL or 'value'.
+disable: local dev
 
-- Quoting: Auto-handled ("col" for Postgres, [col] for MSSQL).
+require, verify-ca, verify-full: production
 
-- Postgres SSL:
+MSSQL → ODBC Driver 18 required
 
-    - disable → local dev
+🛠️ Troubleshooting
 
-    - require, verify-ca, verify-full → production
+❌ Auth failed → Check credentials (try with psql, sqlcmd, mysql)
 
-- MSSQL: Ensure ODBC Driver 18 is installed.
+🌐 Host errors → Try IP instead of hostname
 
-## 🛠️ Troubleshooting
+🔐 Postgres rejects remote → Update postgresql.conf & pg_hba.conf
 
-- Auth failed → Check user/pass/DB. Test with psql, sqlcmd, mysql.
+🧩 MSSQL driver not found → Install msodbcsql18
 
-- DNS/host errors → Use IP instead of hostname.
+🔏 SSL issues → Adjust SSL mode or provide certs
 
-- Postgres remote reject → Check postgresql.conf & pg_hba.conf.
+🚫 Permission denied → Ensure INSERT rights on destination
 
-- MSSQL driver not found → Install msodbcsql18.
+🔐 Security
 
-- SSL errors → Adjust SSL mode or certs.
+Use least-privilege DB accounts
 
-- Permission errors → Ensure user has INSERT rights on destination.
+Run over VPN or secure networks
 
-## 🔐 Security
+Enable TLS/SSL in production
 
-- Use least-privilege DB accounts.
+⚡ Performance Tips
 
-- Use VPN or secure networks for remote DBs.
+Disable heavy indexes/constraints during migration
 
-- Use TLS/SSL for production.
+Increase chunk size if server resources allow
 
-## ⚡ Performance Tips
+Run migrations off-peak for best speed
 
-- Disable heavy indexes/constraints on destination during migration.
-
-- Increase chunk size if resources allow.
-
-- Run during off-peak hours.
-
-- For huge tables → split by ranges (e.g., dates) & run in parallel.
-
+For very large tables → split by ranges (e.g., date ranges)
