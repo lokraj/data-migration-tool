@@ -1,152 +1,152 @@
-🚀 Pro Data Migration Tool
+# 🚀 Pro Data Migration Tool
 
 (PostgreSQL / MSSQL / MySQL)
 
 A Streamlit-based, GUI-first tool that lets you connect two databases simultaneously, choose Source and Destination, visually map fields, and safely migrate data in chunks across PostgreSQL, SQL Server (MSSQL), and MySQL.
 
-✨ Features
+## ✨ Features
 
-🔗 Connect two databases at once (A & B): PostgreSQL, MSSQL, MySQL
+- 🔗 Connect two databases at once (A & B): PostgreSQL, MSSQL, MySQL
 
-🔄 Dynamic Source ↔ Destination selection
+- 🔄 Dynamic Source ↔ Destination selection
 
-📋 Browse schemas → tables → columns with previews
+- 📋 Browse schemas → tables → columns with previews
 
-🎯 Field Mapping UI:
+- 🎯 Field Mapping UI:
 
-Auto-map columns with identical names
+    - Auto-map columns with identical names
 
-Inline mapping editor with support for constants (NULL, 'static_value')
+    - Inline mapping editor with support for constants (NULL, 'static_value')
 
-⚡ Chunked migration for performance & reliability
+- ⚡ Chunked migration for performance & reliability
 
-🔒 Secure connections: SSL for PostgreSQL, ODBC Driver for MSSQL
+- 🔒 Secure connections: SSL for PostgreSQL, ODBC Driver for MSSQL
 
-⚙️ Requirements
-Runtime
+## ⚙️ Requirements
+- Runtime
 
-Python 3.9+ (3.10+ recommended)
+    - Python 3.9+ (3.10+ recommended)
 
-Python Packages
-pip install streamlit SQLAlchemy psycopg2-binary pyodbc PyMySQL
+  - Python Packages
+    - pip install streamlit SQLAlchemy psycopg2-binary pyodbc PyMySQL
 
-Database Client / Driver Setup
+## Database Client / Driver Setup
 
-PostgreSQL → psycopg2-binary only
+- PostgreSQL → psycopg2-binary only
 
-MSSQL → requires ODBC Driver 18
+- MSSQL → requires ODBC Driver 18
 
-sudo apt-get install msodbcsql18
+    - sudo apt-get install msodbcsql18
 
 
-MySQL → PyMySQL only
+    - MySQL → PyMySQL only
 
-✅ Ensure DB servers allow connections and the user has privileges
+- ✅ Ensure DB servers allow connections and the user has privileges
 
-🚀 Getting Started
-1. Clone Project
-git clone https://github.com/<your-username>/data-migration-tool.git
-cd data-migration-tool
+## 🚀 Getting Started
+### 1. Clone Project
 
-2. Create Virtual Environment (Recommended)
-python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
+- cd data-migration-tool
 
-3. Install Dependencies
-pip install -r requirements.txt
+### 2. Create Virtual Environment (Recommended)
+- python -m venv .venv
+- source .venv/bin/activate        # Windows: .venv\Scripts\activate
 
-4. Run the App
-streamlit run streamlit_app.py
+### 3. Install Dependencies
+- pip install -r requirements.txt
 
-🖥️ Using the App
-1️⃣ Connect to Databases
+### 4. Run the App
+- streamlit run streamlit_app.py
 
-Select DB type (Postgres / MSSQL / MySQL)
+## 🖥️ Using the App
+### 1️⃣ Connect to Databases
 
-Enter host, port, database, username, password
+- Select DB type (Postgres / MSSQL / MySQL)
 
-(Postgres only) choose SSL mode
+- Enter host, port, database, username, password
 
-Click Connect A, Connect B, or 🔗 Connect Both
+- (Postgres only) choose SSL mode
 
-2️⃣ Choose Source & Destination
+- Click Connect A, Connect B, or 🔗 Connect Both
 
-Pick one as Source, the other as Destination
+### 2️⃣ Choose Source & Destination
 
-3️⃣ Pick Tables
+- Pick one as Source, the other as Destination
 
-Source: choose Schema + Table → view columns
+### 3️⃣ Pick Tables
 
-Destination: choose Schema + Table → view columns
+- Source: choose Schema + Table → view columns
 
-4️⃣ Map Fields
+- Destination: choose Schema + Table → view columns
 
-Auto-map same-name columns
+### 4️⃣ Map Fields
 
-Inline edit destination → source/constant
+- Auto-map same-name columns
 
-Supports constants: NULL, 'static_value'
+- Inline edit destination → source/constant
 
-5️⃣ Set Chunk Size
+- Supports constants: NULL, 'static_value'
 
-Default: 5000 rows per batch
+### 5️⃣ Set Chunk Size
 
-🔹 Larger = faster, heavier load
+- Default: 5000 rows per batch
 
-🔹 Smaller = safer, slower
+--🔹 Larger = faster, heavier load
 
-6️⃣ Run Migration
+--🔹 Smaller = safer, slower
 
-Click 🚀 Migrate Data
+### 6️⃣ Run Migration
 
-Progress updates with row counts
+- Click 🚀 Migrate Data
 
-Preview panels for both source & destination
+- Progress updates with row counts
 
-📝 Notes & Best Practices
+- Preview panels for both source & destination
 
-Chunked transfers improve safety & performance
+## 📝 Notes & Best Practices
 
-Transactions ensure safe batch inserts
+- Chunked transfers improve safety & performance
 
-Quoting rules auto-applied ("col" Postgres, [col] MSSQL, `col` MySQL)
+- Transactions ensure safe batch inserts
 
-Postgres SSL →
+- Quoting rules auto-applied ("col" Postgres, [col] MSSQL, `col` MySQL)
 
-disable: local dev
+- Postgres SSL →
 
-require, verify-ca, verify-full: production
+- disable: local dev
 
-MSSQL → ODBC Driver 18 required
+- require, verify-ca, verify-full: production
 
-🛠️ Troubleshooting
+- MSSQL → ODBC Driver 18 required
 
-❌ Auth failed → Check credentials (try with psql, sqlcmd, mysql)
+## 🛠️ Troubleshooting
 
-🌐 Host errors → Try IP instead of hostname
+- ❌ Auth failed → Check credentials (try with psql, sqlcmd, mysql)
 
-🔐 Postgres rejects remote → Update postgresql.conf & pg_hba.conf
+- 🌐 Host errors → Try IP instead of hostname
 
-🧩 MSSQL driver not found → Install msodbcsql18
+- 🔐 Postgres rejects remote → Update postgresql.conf & pg_hba.conf
 
-🔏 SSL issues → Adjust SSL mode or provide certs
+- 🧩 MSSQL driver not found → Install msodbcsql18
 
-🚫 Permission denied → Ensure INSERT rights on destination
+- 🔏 SSL issues → Adjust SSL mode or provide certs
 
-🔐 Security
+- 🚫 Permission denied → Ensure INSERT rights on destination
 
-Use least-privilege DB accounts
+## 🔐 Security
 
-Run over VPN or secure networks
+#### - Use least-privilege DB accounts
 
-Enable TLS/SSL in production
+#### - Run over VPN or secure networks
 
-⚡ Performance Tips
+#### - Enable TLS/SSL in production
 
-Disable heavy indexes/constraints during migration
+## ⚡ Performance Tips
 
-Increase chunk size if server resources allow
+- Disable heavy indexes/constraints during migration
 
-Run migrations off-peak for best speed
+- Increase chunk size if server resources allow
 
-For very large tables → split by ranges (e.g., date ranges)
+- Run migrations off-peak for best speed
+
+- For very large tables → split by ranges (e.g., date ranges)
