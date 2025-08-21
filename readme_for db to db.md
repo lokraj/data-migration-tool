@@ -89,11 +89,11 @@ A Streamlit-based, GUI-first tool that lets you connect two databases simultaneo
 
 ### 5️⃣ Set Chunk Size
 
-- Default: 5000 rows per batch
+🔹 Default: 5000 rows per batch
 
---🔹 Larger = faster, heavier load
+🔹 Larger = faster, heavier load
 
---🔹 Smaller = safer, slower
+🔹 Smaller = safer, slower
 
 ### 6️⃣ Run Migration
 
